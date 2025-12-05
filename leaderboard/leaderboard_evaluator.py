@@ -227,6 +227,11 @@ class LeaderboardEvaluator(object):
         # Wait for the world to be ready
         self.world.tick()
 
+        lmanager = self.world.get_lightmanager()
+        lights = lmanager.get_all_lights()
+        states = [light.turn_on() for light in lights]
+
+
         map_name = CarlaDataProvider.get_map().name.split("/")[-1]
         if map_name != town:
             raise Exception("The CARLA server uses the wrong map!"
